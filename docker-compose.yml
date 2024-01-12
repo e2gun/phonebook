@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: gateway/Gateway.Api/Dockerfile
+    networks:
+      - proxybackend
+
+  person.api:
+    image: ${DOCKER_REGISTRY-}personapi
+    build:
+      context: .
+      dockerfile: services/Person.Api/Dockerfile
+    networks:
+      - proxybackend
+
+  contact.api:
+    image: ${DOCKER_REGISTRY-}contactapi
+    build:
+      context: .
+      dockerfile: services/Contact.Api/Dockerfile
+    networks:
+      - proxybackend
+
+  
+
+networks:
+  proxybackend:
+    name: proxybackend
+    driver: bridge
